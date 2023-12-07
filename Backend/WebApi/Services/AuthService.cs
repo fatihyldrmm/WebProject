@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using WebApi.Interfaces.Services;
 
-namespace WebApi.Service
+namespace WebApi.Services
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<IdentityUser> _userManager;

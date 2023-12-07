@@ -1,42 +1,47 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using WebApi.Models;
+using WebApi.Models.Common;
 
 namespace WebApi.Context
 {
-    public class HospitalDbContext : IdentityDbContext<Citizen>
+    public class HospitalDbContext : IdentityDbContext<BaseEntity>
     {
+
+        public DbSet<Doctor> Doctors { get; set; }    
+ 
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options)
         {
 
 
         }
 
-        public DbSet<Appointment> Appointments { get; set; }
-        public DbSet<HospitalClinic> HospitalClinics { get; set; }
-        public DbSet<Doctor> Doctors { get; set; }
-        public DbSet<Hospital> Hospitals { get; set; }
-        public DbSet<Clinic> Clinics { get; set; }
-        public DbSet<Contact> Contacts { get; set; }
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            // ChangeTracker : Entityler üzerinden yapılan değişikliklerin ya da yeni eklenen verinin yakalanmasını sağlayan propertydir.
+            // Update operasyonlarında Track Edilen verileri yakalayıp elde etmemizi sağlar.
 
+            var datas = ChangeTracker
+                        .Entries<BaseEntity>();
+
+            foreach (var data in datas)
+            {
+                _ = data.State switch
+                {
+                    EntityState.Added => data.Entity.CreatedDate = DateTime.UtcNow,
+                };
+            }
+
+            return await base.SaveChangesAsync(cancellationToken);
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<HospitalClinic>()
-                    .HasKey(hc => new { hc.HospitalId, hc.ClinicId });
-            modelBuilder.Entity<HospitalClinic>()
-                    .HasOne(h => h.Hospital)
-                    .WithMany(hc => hc.HospitalClinics)
-                    .HasForeignKey(h => h.HospitalId);
-            modelBuilder.Entity<HospitalClinic>()
-                    .HasOne(h => h.Clinic)
-                    .WithMany(hc => hc.HospitalClinics)
-                    .HasForeignKey(c => c.ClinicId);
-
-
-
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
     }

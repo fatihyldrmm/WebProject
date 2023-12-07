@@ -1,3 +1,12 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using WebApi.Context;
+using WebApi.Interfaces.Repositories;
+using WebApi.Interfaces.Services;
+using WebApi.Models.Common;
+using WebApi.Repositories;
+using WebApi.Services;
+
 namespace WebApi
 {
     public class Program
@@ -5,6 +14,18 @@ namespace WebApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+
+
+            builder.Services.AddDbContext<HospitalDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+ 
+            builder.Services.AddScoped<IDoctorRepository,DoctorRepository>();
+
+            builder.Services.AddIdentity<BaseEntity, IdentityRole>().AddEntityFrameworkStores<HospitalDbContext>();
+
 
             // Add services to the container.
 
@@ -23,6 +44,9 @@ namespace WebApi
             }
 
             app.UseHttpsRedirection();
+
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
