@@ -2,21 +2,21 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
-using WebApi.Models;
-using WebApi.Models.Common;
+using WebApi.Models.Entities;
+using WebApi.Models.Entities.Common;
 
 namespace WebApi.Context
 {
     public class HospitalDbContext : IdentityDbContext<BaseEntity>
     {
-
-        public DbSet<Doctor> Doctors { get; set; }    
- 
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options)
         {
 
 
         }
+
+        public DbSet<Doctor> Doctors { get; set; }    
+ 
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using WebApi.Models.Common;
 using WebApi.Context;
 using WebApi.Interfaces.Repositories;
+using WebApi.Models.Entities.Common;
 
 namespace WebApi.Repositories
 {

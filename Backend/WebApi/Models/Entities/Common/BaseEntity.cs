@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace WebApi.Models.Common
+namespace WebApi.Models.Entities.Common
 {
     public class BaseEntity : IdentityUser
     {
