@@ -1,0 +1,10 @@
+﻿namespace WebApi.Interfaces.Repositories
+{
+    public interface IRepositoryManager
+    {
+        IDoctorRepository DoctorRepository { get; }
+        IPatientRepository PatientRepository { get; }
+        IAppointmentRepository AppointmentRepository { get; }
+        IPoliclinicRepository PoliclinicRepository { get; }
+    }
+}
