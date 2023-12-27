@@ -4,5 +4,6 @@ namespace WebApi.Models.Entities
 {
     public class Doctor : BaseEntity
     {
+        prop
     }
 }
