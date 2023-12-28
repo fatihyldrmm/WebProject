@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using WebApi.Context;
 using WebApi.Interfaces.Repositories;
 using WebApi.Models.Entities.Common;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebApi.Repositories
 {

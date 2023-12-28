@@ -7,17 +7,17 @@ using WebApi.Models.Entities.Common;
 
 namespace WebApi.Context
 {
-    public class HospitalDbContext : IdentityDbContext<BaseEntity>
+    public class HospitalDbContext : IdentityDbContext<IdentityUser>
     {
-        public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options)
+
+        public HospitalDbContext(DbContextOptions options) : base(options)
         {
-
-
         }
 
         public DbSet<Doctor> Doctors { get; set; }    
- 
-
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Policlinic> Policlinics { get; set; }
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             // ChangeTracker : Entityler üzerinden yapılan değişikliklerin ya da yeni eklenen verinin yakalanmasını sağlayan propertydir.

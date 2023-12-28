@@ -2,7 +2,7 @@
 
 namespace WebApi.Models.Entities
 {
-    public class Doctor : BaseEntity//
+    public class Doctor : BaseEntity
     {
         public string Name { get; set; }
         public string Surname { get; set; }

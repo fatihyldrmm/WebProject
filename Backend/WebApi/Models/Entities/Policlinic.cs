@@ -7,4 +7,5 @@ namespace WebApi.Models.Entities
         public string Name { get; set; }
         public ICollection<Doctor> Doctors { get; set; }
     }
+
 }

@@ -10,12 +10,12 @@ namespace WebApi.Controllers
     [ApiController]
     public class DoctorController : ControllerBase
     {
-        private readonly IDoctorRepository _doctorRepository;
+        private readonly IRepositoryManager _manager;
         private readonly IAuthService _authService;
 
-        public DoctorController(IDoctorRepository doctorRepository, IAuthService authService)
+        public DoctorController(IRepositoryManager manager, IAuthService authService)
         {
-            _doctorRepository = doctorRepository;
+            _manager = manager;
             _authService = authService;
         }
 

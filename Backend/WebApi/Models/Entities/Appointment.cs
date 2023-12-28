@@ -9,6 +9,5 @@ namespace WebApi.Models.Entities
         public Patient Patient { get; set; }
         public Guid DoctorId { get; set; }
         public Doctor Doctor { get; set; }
-
     }
 }

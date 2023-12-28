@@ -6,5 +6,6 @@
         IPatientRepository PatientRepository { get; }
         IAppointmentRepository AppointmentRepository { get; }
         IPoliclinicRepository PoliclinicRepository { get; }
+        public void Save();
     }
 }

@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using WebApi.Context;
+using WebApi.Extensions;
 using WebApi.Interfaces.Repositories;
 using WebApi.Interfaces.Services;
 using WebApi.Models.Entities.Common;
@@ -15,23 +17,22 @@ namespace WebApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
-
-            builder.Services.AddDbContext<HospitalDbContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-            });
- 
-            builder.Services.AddScoped<IDoctorRepository,DoctorRepository>();
-
-            builder.Services.AddIdentity<BaseEntity, IdentityRole>().AddEntityFrameworkStores<HospitalDbContext>();
-
-
-            // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
             builder.Services.AddEndpointsApiExplorer();
+
             builder.Services.AddSwaggerGen();
+
+            builder.Services.ConfigureDbContext(builder.Configuration);
+
+            builder.Services.ConfigureIdentity();
+
+            builder.Services.ConfigureRepositoryRegisteration();
+
+            builder.Services.ConfigureRouting();
+
+            builder.Services.AddAutoMapper(typeof(Program));
+
 
             var app = builder.Build();
 
@@ -44,11 +45,9 @@ namespace WebApi
 
             app.UseHttpsRedirection();
 
-
             app.UseAuthentication();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
