@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WebApi.Context;
@@ -8,6 +8,7 @@ using WebApi.Interfaces.Services;
 using WebApi.Models.Entities.Common;
 using WebApi.Repositories;
 using WebApi.Services;
+using WebApi.Controllers;
 
 namespace WebApi
 {
@@ -43,6 +44,12 @@ namespace WebApi
                 app.UseSwaggerUI();
             }
 
+                        if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+};
+
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
@@ -50,6 +57,8 @@ namespace WebApi
             app.UseAuthorization();
 
             app.MapControllers();
+
+                        app.MapAppointmentEndpoints();
 
             app.Run();
         }

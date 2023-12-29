@@ -15,5 +15,6 @@ namespace WebApi.Interfaces.Repositories
         Task<bool> RemoveAsync(string id); // İstenilen Id değerine sahip olan datayı çıkar.
         bool UpdateData(T model); // Datayı güncelle.
         Task<int> SaveAsync(); // Değişiklikleri kaydet.
+
     }
 }
