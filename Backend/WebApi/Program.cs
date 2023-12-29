@@ -29,6 +29,8 @@ namespace WebApi
             builder.Services.ConfigureIdentity();
 
             builder.Services.ConfigureRepositoryRegisteration();
+            
+            builder.Services.ConfigureServiceRegisteration();
 
             builder.Services.ConfigureRouting();
 
@@ -44,11 +46,11 @@ namespace WebApi
                 app.UseSwaggerUI();
             }
 
-                        if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-};
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            };
 
             app.UseHttpsRedirection();
 
@@ -57,8 +59,6 @@ namespace WebApi
             app.UseAuthorization();
 
             app.MapControllers();
-
-                        app.MapAppointmentEndpoints();
 
             app.Run();
         }

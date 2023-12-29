@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.Context;
 using WebApi.Interfaces.Repositories;
+using WebApi.Interfaces.Services;
 using WebApi.Repositories;
+using WebApi.Services;
 
 namespace WebApi.Extensions
 {
@@ -57,7 +59,15 @@ namespace WebApi.Extensions
             services.AddScoped<IDoctorRepository, DoctorRepository>();
             services.AddScoped<IPoliclinicRepository, PoliclinicRepository>();
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
-
+        }
+        public static void ConfigureServiceRegisteration(this IServiceCollection services)
+        {
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IServiceManager, ServiceManager>();
+            services.AddScoped<IPatientService, PatientService>();
+            services.AddScoped<IDoctorService, DoctorService>();
+            services.AddScoped<IPoliclinicService, PoliclinicService>();
+            services.AddScoped<IAppointmentService, AppointmentService>();
         }
         public static void ConfigureRouting(this IServiceCollection services)
         {
