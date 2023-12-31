@@ -141,6 +141,7 @@ namespace WebApi.Context
                     .RuleFor(i => i.AppointmentDay, i => i.Date.Between(DateTime.Now, DateTime.Now.AddDays(30)))
                     .RuleFor(i => i.PatientId, i => i.PickRandom(patientIds))
                     .RuleFor(i => i.DoctorId, i => i.PickRandom(doctorIds))
+                    .RuleFor(i => i.PoliclinicId, i => i.PickRandom(policlinicIds))
                 .Generate(150);
 
             await context.Appointments.AddRangeAsync(appointments);

@@ -2,6 +2,7 @@
 using WebApi.Interfaces.Repositories;
 using WebApi.Interfaces.Services;
 using WebApi.Models.Entities;
+using WebApi.Models.ViewModels.Appointment;
 
 namespace WebApi.Services
 {
@@ -26,9 +27,9 @@ namespace WebApi.Services
         {
             return _manager.AppointmentRepository.GetSingleAsync(method, tracking);
         }
-        public Task<Appointment> GetByIdAsync(string id, bool tracking = true)
+        public Task<Appointment> GetByIdAsync(Guid id, bool tracking = true)
         {
-            return _manager.AppointmentRepository.GetByIdAsync(id, tracking);
+            return _manager.AppointmentRepository.GetByIdAsync(id.ToString(), tracking);
         }
         public Task<bool> AddAsync(Appointment model)
         {

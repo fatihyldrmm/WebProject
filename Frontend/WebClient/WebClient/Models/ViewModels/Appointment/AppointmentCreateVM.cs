@@ -1,4 +1,4 @@
-﻿namespace WebApi.Models.ViewModels.Appointment
+﻿namespace WebClient.Models.ViewModels.Appointment
 {
     public class AppointmentCreateVM
     {

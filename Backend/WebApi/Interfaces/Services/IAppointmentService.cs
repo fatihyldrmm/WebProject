@@ -8,7 +8,7 @@ namespace WebApi.Interfaces.Services
         IEnumerable<Appointment> GetAll(bool tracking = true); // Hepsini Getir.
         IEnumerable<Appointment> GetWhere(Expression<Func<Appointment, bool>> method, bool tracking = true); // Şarta uygun olanları getir.
         Task<Appointment> GetSingleAsync(Expression<Func<Appointment, bool>> method, bool tracking = true); // Şarta uygun olan ilkini getir.
-        Task<Appointment> GetByIdAsync(string id, bool tracking = true); // İstenilen Id değerine sahip olanı getir.
+        Task<Appointment> GetByIdAsync(Guid id, bool tracking = true); // İstenilen Id değerine sahip olanı getir.
         Task<bool> AddAsync(Appointment model); // Data ekle.
         Task<bool> AddRangeAsync(List<Appointment> datas); // Datalar ekle.
         bool Remove(Appointment model); // Data çıkar.
