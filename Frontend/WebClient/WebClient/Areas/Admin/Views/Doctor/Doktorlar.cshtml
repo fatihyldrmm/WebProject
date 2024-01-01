@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Doctor>
+@{
+    var counter = 1;
+}
+<div class="container mt-5">
+    <div class="d-flex justify-content-end my-3">
+        <a class="btn btn-outline-success" asp-action="DoktorEkle">
+            <i class="fa fa-plus"></i>
+            Create
+        </a>
+    </div>
+    <h2>Doktor Listesi</h2>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Ad Soyad</th>
+                <th scope="col">Uzmanlık Alanı</th>
+                <th scope="col">Randevuları</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row"> @(counter++)</th>
+                    <td>Dr. @item.Name @item.Surname</td>
+                    <td>@item.Policlinic.Name</td>
+                    <td><a class="btn btn-success" asp-controller="Doctor" asp-action="Randevuları" asp-route-id="@item.Id">Randevuları</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

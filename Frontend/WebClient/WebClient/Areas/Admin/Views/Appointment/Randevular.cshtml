@@ -1,0 +1,28 @@
+﻿@* @model List<Appointment> *@
+
+<div class="container mt-5">
+    <h2>Hasta Randevu Listesi</h2>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>Randevu Günü</th>
+                <th>Doctor Adı</th>
+                <th>Poliklinik</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Patient.Name</td>
+                    <td>@item.Patient.Surname</td>
+                    <td>@item.AppointmentDay</td>
+                    <td>@item.Doctor.Name @item.Doctor.Surname</td>
+                    <td>@item.Doctor.Policlinic.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using WebClient.ViewModels;
+using WebClient.Models;
 
 namespace WebClient.Controllers
 {
@@ -16,26 +16,56 @@ namespace WebClient.Controllers
             _signInManager = signInManager;
             _roleManager = roleManager;
         }
+
         public IActionResult Index()
         {
             return View();
         }
+
         public IActionResult Login()
         {
             return View();
         }
-        public async Task<IActionResult> LogoutAsync()
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login([FromForm] LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                IdentityUser user = await _userManager.FindByEmailAsync(model.Email);
+                if (user is not null)
+                {
+                    await _signInManager.SignOutAsync();
+                    if ((await _signInManager.PasswordSignInAsync(user, model.Password, false, false)).Succeeded)
+                    {
+                        bool isInRole = await _userManager.IsInRoleAsync(user, "Admin");
+                        if (isInRole)
+                            return Redirect("/" + "Admin");
+                        else
+                            return Redirect("/" + "User");
+                    }
+                }
+                ModelState.AddModelError("Error", "Invalid username or passwoord.");
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> Logout([FromQuery(Name = "ReturnUrl")] string ReturnUrl = "/")
         {
             await _signInManager.SignOutAsync();
-            return Redirect("/"+"Account/Login");
+            return Redirect(ReturnUrl);
         }
+
         public IActionResult Register()
         {
             return View();
         }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([FromForm] RegisterViewModel model)
+        public async Task<IActionResult> Register([FromForm] RegisterDto model)
         {
             var user = new IdentityUser
             {

@@ -1,0 +1,28 @@
+﻿@model Doctor
+@{
+    var counter = 1;
+}
+<div class="container mt-5">
+    <h2>Doktorun Randevuları</h2>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Hasta İsmi</th>
+                <th scope="col">AppointmentDay</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Appointments)
+            {
+                <tr>
+                    <th scope="row">@(counter++)</th>
+                    <td>@item.Patient.Name @item.Patient.Surname</td>
+                    <td>@item.AppointmentDay</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

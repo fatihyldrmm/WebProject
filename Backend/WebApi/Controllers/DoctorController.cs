@@ -19,7 +19,21 @@ namespace WebApi.Controllers
             _authService = authService;
         }
 
-
+        [HttpGet]
+        [Route("getalldoctors")]
+        public IActionResult GetAllDoctors()
+        {
+            try
+            {
+                var doctors = _manager.DoctorRepository.GetAll(); // Asenkron metod
+                return Ok(doctors);
+            }
+            catch (Exception ex)
+            {
+                // Hata yönetimi
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
+        }
 
     }
 }

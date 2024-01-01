@@ -1,5 +1,12 @@
+using WebClient.Config;
+using WebClient.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.ConfigureDbContext(builder.Configuration);
+builder.Services.ConfigureIdentity();
+builder.Services.ConfigureRepositoryRegisteration();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -19,9 +26,24 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.ConfigureDefaultAdminUser();
+app.ConfigureLocalization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapAreaControllerRoute(
+        name: "Admin",
+        areaName: "Admin",
+        pattern: "Admin/{controller=Home}/{action=Index}/{id?}"
+    );
+    endpoints.MapAreaControllerRoute(
+        name: "User",
+        areaName: "User",
+        pattern: "User/{controller=Home}/{action=Index}/{id?}"
+    );
+    endpoints.MapControllerRoute("default", "{controller=Account}/{action=Login}/");
+
+});
 
 app.Run();

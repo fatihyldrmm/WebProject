@@ -1,6 +1,15 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+body {
+    height: auto; /* 100vh yerine auto kullanın */
+    display: block; /* flex yerine block kullanın */
+    align-items: unset; /* Kaldırın veya unset kullanın */
+    justify-content: unset; /* Kaldırın veya unset kullanın */
+    background-color: #f8f9fa;
+}
+
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;

@@ -1,0 +1,52 @@
+﻿@* @model AppointmentCreateViewModel
+
+<form asp-action="CreateAppointment" method="post">
+    <div class="form-group">
+        <label for="policlinic">Policlinic</label>
+        <select asp-for="Policlinics" asp-items="Model.Policlinics" class="form-control">
+            <option value="">Please select a policlinic</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="doctor">Doctor</label>
+        <select asp-for="Doctors" asp-items="Model.Doctors" class="form-control">
+            <option value="">Please select a doctor</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="appointmentDate">Appointment Date</label>
+        <input asp-for="AppointmentDate" type="date" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Create Appointment</button>
+</form>
+ *@
+    <form>
+        <div class="form-group">
+            <label for="adSoyad">Ad</label>
+            <input type="text" class="form-control" id="adSoyad" placeholder="Adınızı Girin">
+        </div>
+        <div class="form-group">
+            <label for="tcKimlikNo">Soyad</label>
+        <input type="text" class="form-control" id="tcKimlikNo" placeholder="Soyadınızı Girin">
+        </div>
+        <div class="form-group">
+            <label for="tarih">Doğum Tarihi</label>
+            <input type="date" class="form-control" id="tarih">
+        </div>
+        <div class="form-group">
+            <label for="bolum">Policlinic Seçiniz</label>
+            <select class="form-control" id="bolum">
+                <option>Kardiyoloji</option>
+                <option>Ortopedi</option>
+                <option>Neuroloji</option>
+                <option>Pediyatri</option>
+                <option>Dahiliye</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tarih">Randevu Tarihi</label>
+            <input type="date" class="form-control" id="tarih">
+        </div>
+        <button type="submit" class="btn btn-primary">Randevu Al</button>
+    </form>
+
